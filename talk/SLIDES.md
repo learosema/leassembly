@@ -9,6 +9,7 @@ and a Creative coder by night
 
  * [https://codepen.io/terabaud](https://codepen.io/terabaud)
  * twitter: @terabaud
+ * it's a nickname I gave myself in the 90's
 
 ------------------------------------------------
 # My talk is about
