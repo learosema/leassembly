@@ -119,8 +119,7 @@ const table = new WebAssembly.Table({
 ---------------------------------------------------
 # DEMO-Time
 
-* Repository: [https://terabaud.github.io/leassembly/](https://github.com/terabaud/leassembly/)
-* GitHub Page: [https://terabaud.github.io/leassembly/](https://terabaud.github.io/leassembly/)
+Let's try something like P5.js in WebAssembly
 
 -------------------------------------------------
 
@@ -136,5 +135,5 @@ const table = new WebAssembly.Table({
 
 # Thank you :)
 
-* Repository: [https://terabaud.github.io/leassembly/](https://github.com/terabaud/leassembly/)
+* Repository: [https://github.com/terabaud/leassembly/](https://github.com/terabaud/leassembly/)
 * GitHub Page: [https://terabaud.github.io/leassembly/](https://terabaud.github.io/leassembly/)
