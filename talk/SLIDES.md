@@ -137,3 +137,4 @@ Let's try something like P5.js in WebAssembly
 
 * Repository: [https://github.com/terabaud/leassembly/](https://github.com/terabaud/leassembly/)
 * GitHub Page: [https://terabaud.github.io/leassembly/](https://terabaud.github.io/leassembly/)
+* Slides: [https://terabaud.github.io/leassembly/talk/](https://terabaud.github.io/leassembly/talk/)
