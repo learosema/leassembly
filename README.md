@@ -2,6 +2,9 @@
 
 This repository contains my learnings about WebAssembly and AssemblyScript
 
+ * [Slides to my talk](https://terabaud.github.io/leassembly/talk/)
+ * [Demo](https://terabaud.github.io/leassembly/)
+
 # Running it locally
 
  * `npm install`
