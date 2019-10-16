@@ -14,11 +14,14 @@ let strokeEnabled = true;
  * @param {Number} height 
  */
 export function initCanvas(width, height) {
-  canvas = document.createElement('canvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+  }
   ctx = canvas.getContext("2d");
   canvas.width = width;
   canvas.height = height;
-  document.body.appendChild(canvas);
+  
 }
 
 /**
