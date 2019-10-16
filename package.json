@@ -1,0 +1,23 @@
+{
+  "name": "leassembly",
+  "version": "1.0.0",
+  "description": "Exploring AssemblyScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "node-demo": "node node-demo",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --use Math=JSMath --importMemory --sourceMap --validate --debug",
+    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --use Math=JSMath --importMemory --sourceMap --validate --optimize",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "assemblyscript": "github:AssemblyScript/assemblyscript",
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
