@@ -1,4 +1,10 @@
-const fs = require('fs');
+import {
+  initCanvas,
+  pixel, rect, circle, ellipse, line, tri,
+  stroke, noStroke, fill, noFill, render
+} from './node-paint.js';
+
+import * as fs from 'fs';
 
 async function main() {
   try {
@@ -14,12 +20,17 @@ async function main() {
       Math,
       "index": {
         initCanvas,
-        pixel
+        pixel, rect, circle, ellipse, line, tri,
+        fill, stroke, noFill, noStroke
       }
     };
-    const module = await WebAssembly.instantiate(fs.readFileSync('build/optimized.wasm'), importObj);
+    const module = await WebAssembly.instantiate(fs.readFileSync('../build/optimized.wasm'), importObj);
     const { exports } = module.instance
-    console.log(exports.add(1, 1));
+    exports.setup();
+    for(let i = 0; i < 1000; i++) {
+      exports.draw(i);
+    }
+    console.log(render());
   } catch(ex) {
     console.error(ex.message);
   }

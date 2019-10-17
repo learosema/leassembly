@@ -3,28 +3,41 @@
  * Node.JS version :)
  */
 
-const { createCanvas } = require('canvas');
+function createTag(tagName, attribs) {
+  let attrString = Object.entries(attribs)
+    .map(attr => `${attr[0]}="${attr[1]}"`)
+    .join(' ');
+  return `<${tagName} ${attrString} />`;
+}
 
-let canvas = null;
-let ctx = null;
-const fillEnabled = false;
-const strokeEnabled = true;
+let markup = [];
+let width = 400;
+let height = 300;
+let ctx = {
+  fillStyle: '#000000',
+  strokeStyle: '#000000',
+};
+
+let fillEnabled = false;
+let strokeEnabled = true;
+
 
 /**
  * Initialize canvas with a width and height
- * 
- * @param {Number} width 
- * @param {Number} height 
+ *
+ * @param {Number} width
+ * @param {Number} height
  */
-export function initCanvas(width, height) {
-  canvas = createCanvas(width, height);
-  ctx = canvas.getContext('2d');
+export function initCanvas(w, h) {
+  markup = [];
+  width = w;
+  height = h
 }
 
 
 /**
  * Set stroke color
- * 
+ *
  * @param {Number} hexNum number hex code, eg 0x663399 for rebeccapurple  
  */
 export function stroke(hexNum) {
@@ -41,7 +54,7 @@ export function noStroke() {
 
 /**
  * Set fill color
- * 
+ *
  * @param {Number} hexNum number hex code, eg 0x663399 for rebeccapurple
  */
 export function fill(hexNum) {
@@ -58,55 +71,52 @@ export function noFill() {
 
 /**
  * Draw rectangle
- * 
- * @param {Number} x 
- * @param {Number} y 
- * @param {Number} w 
- * @param {Number} h 
+ *
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} w
+ * @param {Number} h
  */
 export function rect(x, y, w, h) {
-  if (fillEnabled) ctx.fillRect(x, y, w, h);
-  if (strokeEnabled) ctx.strokeRect(x,y, w, h);
+  const fill = fillEnabled ? ctx.fillStyle : 'none';
+  const stroke = strokeEnabled ? ctx.strokeStyle : 'none';
+  markup.push(createTag('circle', {x,y,w,h, fill, stroke}));
 }
 
 /**
  * Draw pixel
- * 
+ *
  * @param {Number} x
- * @param {Number} y 
+ * @param {Number} y
  */
 export function pixel(x, y) {
-  ctx.fillRect(x, y, 1, 1);
+  rect(x, y, 1, 1);
 }
 
 /**
  * Draw a circle
- * 
- * @param {Number} cx 
- * @param {Number} cy 
- * @param {Number} r 
+ *
+ * @param {Number} cx
+ * @param {Number} cy
+ * @param {Number} r
  */
 export function circle(cx, cy, r) {
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, 2 * Math.PI, false);
-  if (fillEnabled) ctx.fill();
-  if (strokeEnabled) ctx.stroke();
+  const fill = fillEnabled ? ctx.fillStyle : 'none';
+  const stroke = strokeEnabled ? ctx.strokeStyle : 'none';
+  markup.push(createTag('circle', {cx, cy, r, fill, stroke}));
 }
 
 /**
  * Draw an ellipse
- * 
+ *
  * @param {Number} cx x-Coord of center
- * @param {Number} cy y-Coord of center 
+ * @param {Number} cy y-Coord of center
  * @param {Number} rx x-Radius
  * @param {Number} ry y-Radius
- * @param {Number} rotation rotation angle in radians 
+ * @param {Number} rotation rotation angle in radians
  */
 export function ellipse(cx, cy, rx, ry, rotation) {
-  ctx.beginPath();
-  ctx.ellipse(cx, cy, rx, ry, rotation, 0, 2 * Math.PI, false);
-  if (fillEnabled) ctx.fill();
-  if (strokeEnabled) ctx.stroke();
+  console.error('Not implemented yet')
 }
 
 /**
@@ -120,25 +130,31 @@ export function ellipse(cx, cy, rx, ry, rotation) {
  * @param {Number} y3 Third y-Coord
  */
 export function tri(x1,y1, x2,y2, x3,y3) {
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.lineTo(x3, y3);
-  ctx.closePath();
-  if (fillEnabled) ctx.fill();
-  if (strokeEnabled) ctx.stroke();
+  const fill = fillEnabled ? ctx.fillStyle : 'none';
+  const stroke = strokeEnabled ? ctx.strokeStyle : 'none';
+  markup.push(createTag('path', {
+    d: `M${x1},${y1} L${x2},${y2} L${x3},${y3}Z`,
+    fill,
+    stroke
+  }));
 }
 
 /**
  * Draw a line
- * 
+ *
  * @param x1 First x-Coord
  * @param y1 First y-Coord
  * @param x2 Second x-Coord
  * @param y2 Second y-Coord
  */
 export function line(x1, y1, x2, y2) {
-  ctx.beginPath();
-  ctx.line(x1,y1,x2,y2);
-  if (strokeEnabled) ctx.stroke();
+  const fill = fillEnabled ? ctx.fillStyle : 'none';
+  const stroke = strokeEnabled ? ctx.strokeStyle : 'none';
+  markup.push(createTag('circle', {x,y,w,h, fill, stroke}));
+}
+
+export function render() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+    ${markup.join('')}
+  </svg>`;
 }
