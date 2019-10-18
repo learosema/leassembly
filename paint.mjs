@@ -2,16 +2,16 @@
  * A p5-inspired canvas painting API by Lea Rosema
  */
 
-let canvas = null; 
-let ctx = null; 
+let canvas = null;
+let ctx = null;
 let fillEnabled = false;
 let strokeEnabled = true;
 
 /**
  * Initialize canvas with a width and height
- * 
- * @param {Number} width 
- * @param {Number} height 
+ *
+ * @param {Number} width
+ * @param {Number} height
  */
 export function initCanvas(width, height) {
   if (!canvas) {
@@ -21,13 +21,12 @@ export function initCanvas(width, height) {
   ctx = canvas.getContext("2d");
   canvas.width = width;
   canvas.height = height;
-  
 }
 
 /**
  * Set stroke color
- * 
- * @param {Number} hexNum number hex code, eg 0x663399 for rebeccapurple  
+ *
+ * @param {Number} hexNum number hex code, eg 0x663399 for rebeccapurple
  */
 export function stroke(hexNum) {
   strokeEnabled = true;
@@ -43,7 +42,7 @@ export function noStroke() {
 
 /**
  * Set fill color
- * 
+ *
  * @param {Number} hexNum number hex code, eg 0x663399 for rebeccapurple
  */
 export function fill(hexNum) {
@@ -60,11 +59,11 @@ export function noFill() {
 
 /**
  * Draw rectangle
- * 
- * @param {Number} x 
- * @param {Number} y 
- * @param {Number} w 
- * @param {Number} h 
+ *
+ * @param {Number} x x-Coordinate
+ * @param {Number} y y-Coordinate
+ * @param {Number} w width
+ * @param {Number} h height
  */
 export function rect(x, y, w, h) {
   if (fillEnabled) ctx.fillRect(x, y, w, h);
@@ -73,9 +72,9 @@ export function rect(x, y, w, h) {
 
 /**
  * Draw pixel
- * 
- * @param {Number} x
- * @param {Number} y 
+ *
+ * @param {Number} x x-Coord
+ * @param {Number} y y-Coord
  */
 export function pixel(x, y) {
   ctx.fillRect(x, y, 1, 1);
@@ -83,10 +82,10 @@ export function pixel(x, y) {
 
 /**
  * Draw a circle
- * 
- * @param {Number} cx 
- * @param {Number} cy 
- * @param {Number} r 
+ *
+ * @param {Number} cx x-Coord of center
+ * @param {Number} cy y-Coord of center
+ * @param {Number} r radius
  */
 export function circle(cx, cy, r) {
   ctx.beginPath();
@@ -97,9 +96,9 @@ export function circle(cx, cy, r) {
 
 /**
  * Draw an ellipse
- * 
+ *
  * @param {Number} cx x-Coord of center
- * @param {Number} cy y-Coord of center 
+ * @param {Number} cy y-Coord of center
  * @param {Number} rx x-Radius
  * @param {Number} ry y-Radius
  * @param {Number} rotation rotation angle in radians 
@@ -113,7 +112,7 @@ export function ellipse(cx, cy, rx, ry, rotation) {
 
 /**
  * Draw a triangle
- * 
+ *
  * @param {Number} x1 First x-Coord
  * @param {Number} y1 First y-Coord
  * @param {Number} x2 Second x-Coord
@@ -133,7 +132,7 @@ export function tri(x1,y1, x2,y2, x3,y3) {
 
 /**
  * Draw a line
- * 
+ *
  * @param x1 First x-Coord
  * @param y1 First y-Coord
  * @param x2 Second x-Coord

@@ -3,13 +3,6 @@
  * Node.JS version :)
  */
 
-function createTag(tagName, attribs) {
-  let attrString = Object.entries(attribs)
-    .map(attr => `${attr[0]}="${attr[1]}"`)
-    .join(' ');
-  return `<${tagName} ${attrString} />`;
-}
-
 let markup = [];
 let width = 400;
 let height = 300;
@@ -20,7 +13,6 @@ let ctx = {
 
 let fillEnabled = false;
 let strokeEnabled = true;
-
 
 /**
  * Initialize canvas with a width and height
@@ -34,6 +26,19 @@ export function initCanvas(w, h) {
   height = h
 }
 
+
+/**
+ * Create a self-closing XML/HTML tag string
+ *
+ * @param {String} tagName tagName, eg. circle
+ * @param {Object} attribs object of Attribs, e.g {fill:'#ff00ff'}
+ */
+function createTag(tagName, attribs) {
+  let attrString = Object.entries(attribs)
+    .map(attr => `${attr[0]}="${attr[1]}"`)
+    .join(' ');
+  return `<${tagName} ${attrString} />`;
+}
 
 /**
  * Set stroke color
@@ -72,10 +77,10 @@ export function noFill() {
 /**
  * Draw rectangle
  *
- * @param {Number} x
- * @param {Number} y
- * @param {Number} w
- * @param {Number} h
+ * @param {Number} x x-Coord
+ * @param {Number} y y-Coord
+ * @param {Number} w width
+ * @param {Number} h height
  */
 export function rect(x, y, w, h) {
   const fill = fillEnabled ? ctx.fillStyle : 'none';
@@ -86,8 +91,8 @@ export function rect(x, y, w, h) {
 /**
  * Draw pixel
  *
- * @param {Number} x
- * @param {Number} y
+ * @param {Number} x x-Coord
+ * @param {Number} y y-Coord
  */
 export function pixel(x, y) {
   rect(x, y, 1, 1);
@@ -96,9 +101,9 @@ export function pixel(x, y) {
 /**
  * Draw a circle
  *
- * @param {Number} cx
- * @param {Number} cy
- * @param {Number} r
+ * @param {Number} cx x-Coord of center
+ * @param {Number} cy y-Coord of center
+ * @param {Number} r radius
  */
 export function circle(cx, cy, r) {
   const fill = fillEnabled ? ctx.fillStyle : 'none';
@@ -121,7 +126,7 @@ export function ellipse(cx, cy, rx, ry, rotation) {
 
 /**
  * Draw a triangle
- * 
+ *
  * @param {Number} x1 First x-Coord
  * @param {Number} y1 First y-Coord
  * @param {Number} x2 Second x-Coord

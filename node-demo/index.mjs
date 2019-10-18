@@ -2,9 +2,14 @@ import {
   initCanvas,
   pixel, rect, circle, ellipse, line, tri,
   stroke, noStroke, fill, noFill, render
-} from './node-paint.js';
+} from './svg-paint.mjs';
 
 import * as fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 async function main() {
   try {
@@ -24,7 +29,7 @@ async function main() {
         fill, stroke, noFill, noStroke
       }
     };
-    const module = await WebAssembly.instantiate(fs.readFileSync('../build/optimized.wasm'), importObj);
+    const module = await WebAssembly.instantiate(fs.readFileSync(__dirname + '/../build/optimized.wasm'), importObj);
     const { exports } = module.instance
     exports.setup();
     for(let i = 0; i < 1000; i++) {
@@ -34,7 +39,6 @@ async function main() {
   } catch(ex) {
     console.error(ex.message);
   }
-  
 }
 
 main();
