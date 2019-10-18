@@ -1,2 +1,1 @@
-The node demo is a work in progress.
-Here, I should try how the AssemblyScript Loader works :).
+The node.js version uses an SVG implementation of the p5-like paint API module.
