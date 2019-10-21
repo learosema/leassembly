@@ -77,9 +77,9 @@ and a Creative coder by night
 
 * `npm i AssemblyScript/assemblyscript`
 * `npx asinit .` creates a new project
-* all AssemblyScript goes into `assembly/` folder 
+* AssemblyScript goes into `assembly/` folder
 * it has a `tsconfig.json` for AssemblyScript
-* `npm run asbuild` compile AssemblyScript to WASM
+* `npm run asbuild` compiles AssemblyScript to WASM
 
 ---------------------------------------------------
 # Calling from JS
