@@ -72,6 +72,14 @@ and a Creative coder by night
 * Good for primitive flat data structures
 * You can mess in memory like in C64 times
 * `load<T>` and `store<T>` is your `PEEK` and `POKE`
+---------------------------------------------------
+# Bootstrapping an AssemblyScript project
+
+* `npm i AssemblyScript/assemblyscript`
+* `npx asinit .` creates a new project
+* all AssemblyScript goes into `assembly/` folder 
+* it has a `tsconfig.json` for AssemblyScript
+* `npm run asbuild` compile AssemblyScript to WASM
 
 ---------------------------------------------------
 # Calling from JS
