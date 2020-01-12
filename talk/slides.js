@@ -4,6 +4,7 @@ class App {
     this.el = el || document.querySelector('main')
     this.md = new markdownit();
     this.handleScroll = this.handleScroll.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyStroke = this.handleKeyStroke.bind(this);
   }
 
@@ -22,6 +23,10 @@ class App {
       anchors.forEach(anchor => {
         anchor.setAttribute('target', '_blank');
       });
+      const lis = [...div.querySelectorAll('li')];
+      lis.forEach(li => {
+        li.classList.add('hide');
+      });
       return {
         id: 'slide' + idx,
         title: (div.querySelector('h1') || {}).textContent,
@@ -38,14 +43,31 @@ class App {
 
   mounted() {
     Prism.highlightAll();
-    if (document.location.hash && document.querySelector(document.location.hash)) {
-      this.goTo(document.location.hash);
+    if (document.location.hash) {
+      const hashElement = document.querySelector(document.location.hash);
+      if (hashElement) {
+        this.goTo(document.location.hash);
+        this.onSlideEnter(hashElement);
+      }
     } else {
-      window.scrollTo(0, 0);
+      const slideId = 'slide0';
+      this.goTo('#' + slideId);
+      // window.scrollTo(0, 0);
     }
     this.el.addEventListener('scroll', this.handleScroll);
     this.handleScroll();
+    window.addEventListener('keydown', this.handleKeyDown);
     window.addEventListener('keyup', this.handleKeyStroke);
+    this.nav = this.el.querySelector('nav');
+    this.nav.addEventListener('click', (e) => {
+      if (e.target.nodeName === 'A') {
+        const href = e.target.getAttribute('href');
+        if (href[0] === '#' && href.length > 0) {
+          this.updateRevealed(href.slice(1));
+        }
+      }
+    });
+    // this.el.classList.add('scrollbehavior--smooth');
     this.timeLeft = 20 * 60;
   }
 
@@ -83,20 +105,31 @@ class App {
     return this.getScrollPositions().findIndex(x => x > -h + 1 && x < h);
   }
 
+  onSlideEnter(slideElement) {
+    // const lis = [...slideElement.querySelectorAll('li')];
+    // lis.map(li => li.classList.add('hide'));
+  }
+
+  onSlideLeave(slideElement) {
+  }
+
   handleScroll() {
     const currentPos = this.getScrollIndex();
     const hash = '#slide' + currentPos;
     if (hash !== document.location.hash) {
+      // this.onSlideLeave(lastSlideElement, );
+      this.onSlideEnter(document.querySelector(hash));
       history.replaceState(null, null, hash);
     }
+    
     const currentDot = document.querySelector('li.current');
     const newDot = document.querySelectorAll('nav li')[currentPos];
     if (newDot !== currentDot) {
       if (currentDot) {
-        currentDot.setAttribute('class', '');
+        currentDot.classList.remove('current');
       }
       if (newDot) {
-        newDot.setAttribute('class', 'current');
+        newDot.classList.add('current');
       }
       if (currentPos >= 1) {
         this.startClock();
@@ -104,14 +137,35 @@ class App {
     }
   }
 
-  handleKeyStroke(e) {
+  handleKeyDown(e) {
     const SPACE = 32;
+    if (e.keyCode === SPACE) {
+      e.preventDefault();
+      return;
+    }
+  }
+  handleKeyStroke(e) {
     const ENTER = 13;
     const LEFT = 37;
     const RIGHT = 39;
-    if (e.keyCode === SPACE || e.keyCode === ENTER || e.keyCode === RIGHT) {
+    if (e.keyCode === ENTER || e.keyCode === RIGHT) {
       this.startClock();
       this.nextSlide();
+      return;
+    }
+    if (e.keyCode === 32 && document.location.hash) {
+      const slideId = document.location.hash.slice(1);
+      const currentSlide = document.querySelector(document.location.hash);
+      if (currentSlide) {
+        const hiddenElement = currentSlide.querySelector('.hide');
+        if (hiddenElement) {
+          hiddenElement.classList.remove('hide');
+          this.updateRevealed(slideId);
+        } else {
+          this.nextSlide();
+        }
+      }
+      e.preventDefault();
       return;
     }
     if (e.keyCode === LEFT) {
@@ -121,14 +175,28 @@ class App {
     e.preventDefault();
   }
 
+  updateRevealed(slideId) {
+    const slide = document.querySelector('#' + slideId);
+    const dot = document.querySelector('#nav_' + slideId);
+    const hiddenElements = slide.querySelectorAll('.hide');
+    if (hiddenElements.length === 0) {
+      dot.classList.add('revealed');
+    } else {
+      dot.classList.remove('revealed');
+    }
+  }
+
+
   goTo(hash) {
     const hashElement = document.querySelector(hash);
     if (hashElement) {
       const position = Math.round(hashElement.getBoundingClientRect().top + this.el.scrollTop);
       this.el.scrollTo(0, position);
       if (hash !== document.location.hash) {
+        // this.onSlideEnter(hashElement);
         history.replaceState(null, null, hash)
       }
+      this.updateRevealed(hash.slice(1));
     }
   }
 
@@ -151,7 +219,7 @@ class App {
     this.el.innerHTML = `
       <nav><ul>
         ${this.slides.map(slide =>
-          `<li><a href="#${slide.id}" title="${slide.title}">${slide.title}</a></li>`
+          `<li id="nav_${slide.id}"><a href="#${slide.id}" title="${slide.title}">${slide.title}</a></li>`
         ).join('')}
       </ul></nav>
 

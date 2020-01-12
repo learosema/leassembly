@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 
-
 :root {
   --font-size-min: 16px;
   --font-size-max: 64px;
-  --bg-color: #121212;
+  --bg-color: #08131c;
+  --bg-color-2: #0a0c13;
   --text-color: #ffffff;
   --headline-color: #2fafff;
   --link-color: #2f7fff;
@@ -12,21 +12,30 @@
   --slide-dot-color: var(--headline-color);
   --slide-dot-border-color: var(--text-color);
   --slide-dot-color--selected: var(--bg-color);
+  --slide-dot-color--revealed: #7fc;
 
   --code-bg-color: #222;
   --code-fg-color: #7fc;
+
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --bg-color: #f7faff;
+    --bg-color-2: #ffffff;
     --text-color: #121224;
     --headline-color: #1256cf;
     --link-color: #12347f;
     --code-bg-color: #fdf6e3;
     --code-fg-color: #586e75;
+    --slide-dot-color--revealed: #173;
   }
 }
+
+
+
+/* End Custom Scrollbar CSS */
+
 
 * {
   box-sizing: border-box;
@@ -34,12 +43,12 @@
 
 body {
   background: var(--bg-color);
+  background: linear-gradient(120deg, var(--bg-color) 0%, var(--bg-color) 50%, var(--bg-color-2) 50%);
   color: var(--text-color);
   font-family: 'Ubuntu', sans-serif;
   font-size: 28px;
   line-height: 1.8;
-  margin: 0;
-  width: 100vw;
+  margin: 0 auto;
   height: 100vh;
   overflow: hidden;
 }
@@ -78,7 +87,7 @@ h3, h4, h5, h6 {
 main {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 
@@ -88,6 +97,9 @@ main {
   }
 }
 
+.scrollbehavior--smooth {
+  scroll-behavior: smooth;
+}
 
 
 /** Slide dots ******************************/
@@ -128,15 +140,21 @@ nav li a {
   display: block
 }
 
+
 nav li a:focus, nav li.current a {
   background: var(--slide-dot-color--selected);
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse 3s ease-in-out infinite;
 }
+
+nav li.revealed a, nav li.current.revealed a {
+  border: 2px solid var(--slide-dot-color--revealed);
+  background: var(--slide-dot-color--revealed);
+}
+
 
 @keyframes pulse {
-  50% { transform: scale(1.5); }
+  50% { transform: scale(1.2); }
 }
-
 
 /*******************************************************/
 
@@ -148,24 +166,43 @@ nav li a:focus, nav li.current a {
   padding: 16px;
 }
 
-@media (min-width: 768px) {
+.slide__image img {
+  width: 90vmin;
+}
+
+
+@media (min-width: 640px) {
   .slide__image {
-    float: left;
-    width: 45vmin;
-    margin: 0 2vmin 0 0;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+  }
+
+  .slide__image img {
+    width: auto;
+    height: 100%;
   }
 }
 
-.slide__image img {
-  max-width: 40vmin;
-  max-height: 40vmin;
+@media (min-width: 768px) {
+  .slide__image {
+    display: block;
+    float: right;
+    width: calc(55vmin + 10vmax);
+    height: auto;
+    margin: 0 0 0 2vmin;
+  }
+
+  .slide__image img {
+    width: 100%;
+  }
 }
 
 .clock {
   position: fixed;
   bottom: 16px;
   right: 32px;
+  font-size: 14px;
 }
 
 a {
@@ -183,4 +220,12 @@ p > code, li > code {
 
 pre[class*=language-], code[class*=language-] {
   font-size: .8em;
+}
+
+.slide li {
+  opacity: 1;
+}
+
+.slide li.hide {
+  opacity: 0;
 }
