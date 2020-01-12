@@ -47,6 +47,21 @@ and a Creative coder by night
 * it's a subset of TypeScript
 
 --------------------------------------------------
+# How does AssemblyScript look like?
+
+```js
+export function fib(n: i32): i32 {
+  var a = 0, b = 1
+  for (let i = 0; i < n; i++) {
+    let t = a + b; a = b; b = t
+  }
+  return b
+}
+```
+
+It's pretty much like TypeScript :)
+
+--------------------------------------------------
 # AssemblyScript vs TypeScript
 
 * no `any`
@@ -120,10 +135,14 @@ const table = new WebAssembly.Table({
 ---------------------------------------------------
 # DEMO-Time
 
-Let's try something like P5.js in WebAssembly
+Let's visit [https://webassembly.studio/](https://webassembly.studio/)
+
+---------------------------------------------------
+# DEMO-Time 2
+
+Let's paint on a canvas with AssemblyScript with a p5.js-like API :)
 
 -------------------------------------------------
-
 # To sum up
 
 * WASM runs in a sandbox
@@ -133,6 +152,12 @@ Let's try something like P5.js in WebAssembly
 * WASM is a complement of JS not a replacement
 
 --------------------------------------------------
+# Cool projects using AssemblyScript
+
+* [https://github.com/infamous/glas](https://github.com/infamous/glas)
+* [https://github.com/petersalomonsen/javascriptmusic](https://github.com/petersalomonsen/javascriptmusic)
+
+-------------------------------------------------
 
 # Thank you :)
 
@@ -141,3 +166,4 @@ Let's try something like P5.js in WebAssembly
 * Slides: [https://terabaud.github.io/leassembly/talk/](https://terabaud.github.io/leassembly/talk/)
 * AssemblyScript [https://docs.assemblyScript.org](https://docs.assemblyScript.org/)
 * MDN [https://developer.mozilla.org/en-US/docs/WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly)
+* WebAssembly Studio: [https://webassembly.studio/](https://webassembly.studio/)
