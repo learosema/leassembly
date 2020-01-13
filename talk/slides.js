@@ -20,10 +20,6 @@ class App {
       anchors.forEach(anchor => {
         anchor.setAttribute('target', '_blank');
       });
-      // const lis = [...div.querySelectorAll('li')];
-      //lis.forEach(li => {
-      //  li.classList.add('hide');
-      //});
       return {
         id: 'slide' + idx,
         title: (div.querySelector('h1') || {}).textContent,
@@ -34,11 +30,10 @@ class App {
 
   render() {
     this.el.innerHTML = `
-      <nav><ul>
-        ${this.slides.map(slide =>
-          `<li id="nav_${slide.id}"><a href="#${slide.id}" title="${slide.title}">${slide.title}</a></li>`
-        ).join('')}
-      </ul></nav>
+      ${this.slides.map((slide) => `
+      <div class="slide" id="${slide.id}">
+        ${slide.content}
+      </div>`).join('')}
     `;
   }
 
