@@ -6,7 +6,7 @@
 
 Hi! I'm Lea Rosema
 
-I am a Junior Product Engneer at SinnerSchrader by day
+I am a Junior Product Engineer at SinnerSchrader by day
 and a Creative coder by night
 
 * [https://codepen.io/terabaud](https://codepen.io/terabaud)
