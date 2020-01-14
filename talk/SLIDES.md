@@ -1,5 +1,7 @@
 # Fun with AssemblyScript
+
 -----------------------------------------------
+
 # Introduction
 
 Hi! I'm Lea Rosema 
@@ -7,11 +9,12 @@ Hi! I'm Lea Rosema
 I am a Junior Product Engneer at SinnerSchrader by day
 and a Creative coder by night
 
- * [https://codepen.io/terabaud](https://codepen.io/terabaud)
- * twitter: @terabaud
- * it's a nickname I gave myself in the 90's
+* [https://codepen.io/terabaud](https://codepen.io/terabaud)
+* twitter: @terabaud
+* it's a nickname I gave myself in the 90's
 
-------------------------------------------------
+-----------------------------------------------
+
 # My talk is about
 
 * WebAssembly
@@ -20,7 +23,8 @@ and a Creative coder by night
 * having fun with it despite the shortcomings
 * ...without learning a (completely) new programming language
 
-------------------------------------------------
+-----------------------------------------------
+
 # So, what is WebAssembly?
 
 * new binary executable format for the web
@@ -28,7 +32,7 @@ and a Creative coder by night
 * idea of emscripten: compile "anything" to JavaScript
 * gained popularity through games & emulators ported to the web
 
-------------------------------------------------
+-----------------------------------------------
 
 # What is Emscripten?
 
@@ -38,7 +42,7 @@ and a Creative coder by night
 * solution: WASM, a binary format to the rescue
 * ...it can be decoded much faster than JS can be parsed
 
--------------------------------------------------
+-----------------------------------------------
 
 # Do I need to learn C++/Rust?
 
@@ -46,7 +50,8 @@ and a Creative coder by night
 * For example, there is AssemblyScript
 * it's a subset of TypeScript
 
---------------------------------------------------
+-----------------------------------------------
+
 # How does AssemblyScript look like?
 
 ```js
@@ -59,9 +64,26 @@ export function fib(n: i32): i32 {
 }
 ```
 
-It's pretty much like TypeScript :)
+It's pretty much like TypeScript, right?
 
---------------------------------------------------
+-----------------------------------------------
+
+# Well..
+
+```js
+function computeSum(arr: i32[]): i32 {
+  var sum = 0
+  arr.forEach(value => {
+    sum += value; // cannot find "sum"
+  })
+  return sum
+}
+```
+
+No closures. WASM spec still work in progress.
+
+-----------------------------------------------
+
 # AssemblyScript vs TypeScript
 
 * no `any`
@@ -70,24 +92,29 @@ It's pretty much like TypeScript :)
 * `i32` for 32bit signed integer
 * `f64` for 64bit floating point numbers
 * `number` is an alias to `f64`
+* no closure functions
 
---------------------------------------------------
+-----------------------------------------------
+
 # Data flow (and its shortcomings)
 
 * WASM runs in a sandbox
-* no direct access to DOM API's
+* no direct access to DOM APIs
 * Objects cannot yet flow in and out of WASM natively
 * instead, have to deal with pointers
 * But AssemblyScript has a loader that does that for you
 
----------------------------------------------------
+-----------------------------------------------
+
 # Low-level Memory Access
 
 * Going low-level can be fun
 * Good for primitive flat data structures
 * You can mess in memory like in C64 times
 * `load<T>` and `store<T>` is your `PEEK` and `POKE`
----------------------------------------------------
+
+-----------------------------------------------
+
 # Bootstrapping an AssemblyScript project
 
 * `npm i AssemblyScript/assemblyscript`
@@ -96,7 +123,8 @@ It's pretty much like TypeScript :)
 * it has a `tsconfig.json` for AssemblyScript
 * `npm run asbuild` compiles AssemblyScript to WASM
 
----------------------------------------------------
+-----------------------------------------------
+
 # Calling from JS
 
 ## Browser
@@ -112,7 +140,9 @@ const module = await WebAssembly.instantiateStreaming(
 const module = await WebAssembly.instantiate(
   fs.readFileSync('module.wasm'), importObj);
 ```
----------------------------------------------------
+
+-----------------------------------------------
+
 # Specify the environment
 
 ```js
@@ -127,7 +157,9 @@ const importObj = {
   Math // additional namespaces to use from js-land
 };
 ```
----------------------------------------------------
+
+-----------------------------------------------
+
 # Additional environment stuff
 
 ```js
@@ -140,17 +172,20 @@ const table = new WebAssembly.Table({
 });
 ```
 
----------------------------------------------------
+-----------------------------------------------
+
 # DEMO-Time
 
 Let's visit [https://webassembly.studio/](https://webassembly.studio/)
 
----------------------------------------------------
+-----------------------------------------------
+
 # DEMO-Time 2
 
 Let's paint on a canvas with AssemblyScript with a p5.js-like API :)
 
--------------------------------------------------
+-----------------------------------------------
+
 # To sum up
 
 * WASM runs in a sandbox
@@ -159,13 +194,13 @@ Let's paint on a canvas with AssemblyScript with a p5.js-like API :)
 * There's always some JS glue code to get WASM running
 * WASM is a complement of JS not a replacement
 
---------------------------------------------------
+-----------------------------------------------
 # Cool projects using AssemblyScript
 
 * [https://github.com/infamous/glas](https://github.com/infamous/glas)
 * [https://github.com/petersalomonsen/javascriptmusic](https://github.com/petersalomonsen/javascriptmusic)
 
--------------------------------------------------
+-----------------------------------------------
 
 # Thank you :)
 
