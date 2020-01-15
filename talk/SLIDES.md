@@ -80,7 +80,7 @@ function computeSum(arr: i32[]): i32 {
 }
 ```
 
-No closures. WASM spec still work in progress.
+No closures. WASM closure spec still in the works.
 
 -----------------------------------------------
 
