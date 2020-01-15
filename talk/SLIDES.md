@@ -52,15 +52,15 @@ and a Creative coder by night
 
 -----------------------------------------------
 
-## How does AssemblyScript look like?
+## AssemblyScript Hello World 👋
 
 ```js
 export function fib(n: i32): i32 {
-  var a = 0, b = 1
+  var a = 0, b = 1;
   for (let i = 0; i < n; i++) {
     let t = a + b; a = b; b = t
   }
-  return b
+  return b;
 }
 ```
 
@@ -72,11 +72,11 @@ It's pretty much like TypeScript, right?
 
 ```js
 function computeSum(arr: i32[]): i32 {
-  var sum = 0
+  var sum = 0;
   arr.forEach(value => {
     sum += value; // cannot find "sum"
   })
-  return sum
+  return sum;
 }
 ```
 
