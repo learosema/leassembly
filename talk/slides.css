@@ -32,7 +32,24 @@
   }
 }
 
+/* Begin Custom Scrollbar CSS */
+::-webkit-scrollbar {
+  width: 24px;
+}
 
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 1px solid black;
+  background: linear-gradient(to bottom, deepskyblue 0%, deepskyblue 20%, 
+    pink 20%, pink 40%, white 40%, white 60%, 
+    pink 60%, pink 80%, deepskyblue 80%, deepskyblue 100%);
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.8); 
+}
 
 /* End Custom Scrollbar CSS */
 
@@ -81,6 +98,12 @@ h3, h4, h5, h6 {
 @media (min-width: 1280px) {
   body {
     font-size: 40px;
+  }
+}
+
+@media (min-width: 1600px) {
+  body {
+    font-size: 44px;
   }
 }
 
