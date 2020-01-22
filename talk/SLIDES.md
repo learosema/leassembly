@@ -6,8 +6,9 @@
 
 Hi! I'm Lea Rosema
 
-Junior Product Engineer at SinnerSchrader by day
-Creative coder by night
+Junior Product Engineer at SinnerSchrader by day 🌞
+
+Creative coder by night 🌙
 
 * [https://codepen.io/terabaud](https://codepen.io/terabaud)
 * twitter: @terabaud
@@ -19,7 +20,7 @@ Creative coder by night
 
 * WebAssembly
 * its limitations
-* getting around the limitations
+* getting around the limitations 🔨
 * without learning a (completely) new programming language
 
 -----------------------------------------------
@@ -89,11 +90,10 @@ No closures. WASM closure spec still in the works.
 
 * no `any`
 * specific integer and floating point types
-* `u32` for 32bit unsigned integer
-* `i32` for 32bit signed integer
-* `f64` for 64bit floating point numbers
+* `i32`, `u32` for 32bit signed/unsigned integer
+* `f32`, `f64` for 32/64bit floating point numbers
 * `number` is an alias to `f64`
-* specific `Math` implementations (for `f32`, `f64` or js Math)
+* specific `Math` implementations (`f32`, `f64` or js Math)
 * no closure functions
 
 -----------------------------------------------
@@ -110,17 +110,16 @@ No closures. WASM closure spec still in the works.
 
 ## Low-level Memory Access
 
-* Going low-level can be fun
+* Low level memory access via `load<T>` and `store<T>` 
+* Like `PEEK` and `POKE` in C64 times if you remember
 * Good for primitive flat data structures
-* You can mess in memory like in C64 times
-* `load<T>` and `store<T>` is your `PEEK` and `POKE`
 
 -----------------------------------------------
 
 ## Bootstrapping an AssemblyScript project
 
 * `npm i AssemblyScript/assemblyscript`
-* `npx asinit .` creates a new project
+* `npx asinit .` creates new project
 * AssemblyScript goes into `assembly/` folder
 * it has a `tsconfig.json` for AssemblyScript
 * `npm run asbuild` compiles AssemblyScript to WASM
