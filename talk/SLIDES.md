@@ -6,8 +6,8 @@
 
 Hi! I'm Lea Rosema
 
-I am a Junior Product Engineer at SinnerSchrader by day
-and a Creative coder by night
+Junior Product Engineer at SinnerSchrader by day
+Creative coder by night
 
 * [https://codepen.io/terabaud](https://codepen.io/terabaud)
 * twitter: @terabaud
@@ -18,10 +18,9 @@ and a Creative coder by night
 ## My talk is about
 
 * WebAssembly
-* The cool things
-* Its shortcomings
-* having fun with it despite the shortcomings
-* ...without learning a (completely) new programming language
+* its limitations
+* getting around the limitations
+* without learning a (completely) new programming language
 
 -----------------------------------------------
 
@@ -40,12 +39,14 @@ and a Creative coder by night
 * transpiles it to a low-level JavaScript subset, called asmJS
 * problem of asmJS: huge amount of JS, slow parsing times
 * solution: WASM, a binary format to the rescue
-* ...it can be decoded much faster than JS can be parsed
+* can be decoded much faster than JS can be parsed
 
 -----------------------------------------------
 
-## Do I need to learn C++/Rust?
+## Do I need to learn a new programming language?
 
+* WebAssembly is usually not written by hand
+* Most WebAssembly introductions use C++ or Rust
 * There are more choices than just C++ or Rust
 * For example, there is AssemblyScript
 * it's a subset of TypeScript
@@ -68,7 +69,7 @@ It's pretty much like TypeScript, right?
 
 -----------------------------------------------
 
-## Well
+## Limitations
 
 ```js
 function computeSum(arr: i32[]): i32 {
@@ -92,6 +93,7 @@ No closures. WASM closure spec still in the works.
 * `i32` for 32bit signed integer
 * `f64` for 64bit floating point numbers
 * `number` is an alias to `f64`
+* specific `Math` implementations (for `f32`, `f64` or js Math)
 * no closure functions
 
 -----------------------------------------------
