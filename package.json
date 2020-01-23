@@ -14,10 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "assemblyscript": "github:AssemblyScript/assemblyscript",
     "esm": "^3.2.25"
   },
   "devDependencies": {
+    "assemblyscript": "^0.8.1",
     "express": "^4.17.1"
   }
 }

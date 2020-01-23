@@ -6,9 +6,9 @@
 
 Hi! I'm Lea Rosema
 
-Junior Product Engineer at SinnerSchrader by day 🌞
+Junior Product Engineer at SinnerSchrader by day 👩‍💻🌞
 
-Creative coder by night 🌙
+Creative coder by night 👩‍💻
 
 * [https://codepen.io/terabaud](https://codepen.io/terabaud)
 * twitter: @terabaud
@@ -118,7 +118,7 @@ No closures. WASM closure spec still in the works.
 
 ## Bootstrapping an AssemblyScript project
 
-* `npm i AssemblyScript/assemblyscript`
+* `npm i assemblyscript -D`
 * `npx asinit .` creates new project
 * AssemblyScript goes into `assembly/` folder
 * it has a `tsconfig.json` for AssemblyScript
