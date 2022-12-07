@@ -18,6 +18,6 @@
   },
   "devDependencies": {
     "assemblyscript": "^0.8.1",
-    "express": "^4.17.1"
+    "express": "^4.18.2"
   }
 }
